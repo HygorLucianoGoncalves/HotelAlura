@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 
 import br.com.hotelalura.factory.ConnectionFactory;
-import br.com.hotelarura.model.Reservas;
+import br.com.hotelalura.model.Reservas;
 
 public class ReservasDAO {
 	

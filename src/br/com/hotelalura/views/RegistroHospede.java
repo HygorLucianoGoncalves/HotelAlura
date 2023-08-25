@@ -58,7 +58,7 @@ public class RegistroHospede extends JFrame {
 	 */
 	public RegistroHospede() {
 		
-		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistroHospede.class.getResource("/br/com/hotelarura/imagenes/lOGO-50PX.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistroHospede.class.getResource("/br/com/hotelalura/imagenes/lOGO-50PX.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 910, 634);
 		contentPane = new JPanel();
@@ -171,7 +171,7 @@ public class RegistroHospede extends JFrame {
 		
 		txtDataN = new JDateChooser();
 		txtDataN.setBounds(560, 278, 285, 36);
-		txtDataN.getCalendarButton().setIcon(new ImageIcon(RegistroHospede.class.getResource("/br/com/hotelarura/imagenes/icon-reservas.png")));
+		txtDataN.getCalendarButton().setIcon(new ImageIcon(RegistroHospede.class.getResource("/br/com/hotelalura/imagenes/icon-reservas.png")));
 		txtDataN.getCalendarButton().setBackground(SystemColor.textHighlight);
 		txtDataN.setDateFormatString("yyyy-MM-dd");
 		contentPane.add(txtDataN);
@@ -305,12 +305,12 @@ public class RegistroHospede extends JFrame {
 		JLabel imageFundo = new JLabel("");
 		imageFundo.setBounds(0, 121, 479, 502);
 		panel.add(imageFundo);
-		imageFundo.setIcon(new ImageIcon(RegistroHospede.class.getResource("/br/com/hotelarura/imagenes/registro.png")));
+		imageFundo.setIcon(new ImageIcon(RegistroHospede.class.getResource("/br/com/hotelalura/imagenes/registro.png")));
 		
 		JLabel logo = new JLabel("");
 		logo.setBounds(194, 39, 104, 107);
 		panel.add(logo);
-		logo.setIcon(new ImageIcon(RegistroHospede.class.getResource("/br/com/hotelarura/imagenes/Ha-100px.png")));
+		logo.setIcon(new ImageIcon(RegistroHospede.class.getResource("/br/com/hotelalura/imagenes/Ha-100px.png")));
 	}
 	
 	//Código que permite movimentar a janela pela tela seguindo a posição de "x" y "y"

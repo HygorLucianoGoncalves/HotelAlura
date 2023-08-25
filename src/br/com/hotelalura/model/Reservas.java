@@ -1,4 +1,4 @@
-package br.com.hotelarura.model;
+package br.com.hotelalura.model;
 
 import java.util.Date;
 
