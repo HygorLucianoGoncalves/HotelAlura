@@ -4,21 +4,23 @@ import java.util.Date;
 
 public class Reservas {
 
-	private int id;
+	private Integer id;
 	private Date dataEntrada;
 	private Date dataSaida;
-	private int valor;
+	private double valor;
 	private String formaPagamento;
 	
 	
 	
 	
 	
+	
+	
 	//GET ADN SET 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public Date getDataEntrada() {
@@ -33,10 +35,10 @@ public class Reservas {
 	public void setDataSaida(Date dataSaida) {
 		this.dataSaida = dataSaida;
 	}
-	public int getValor() {
+	public double getValor() {
 		return valor;
 	}
-	public void setValor(int valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 	public String getFormaPagamento() {
@@ -45,6 +47,14 @@ public class Reservas {
 	public void setFormaPagamento(String formaPagamento) {
 		this.formaPagamento = formaPagamento;
 	}
+	
+	
+	
+	
+	
+
+	
+	
 	
 	
 
