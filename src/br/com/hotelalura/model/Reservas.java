@@ -10,12 +10,6 @@ public class Reservas {
 	private double valor;
 	private String formaPagamento;
 	
-	
-	
-	
-	
-	
-	
 	//GET ADN SET 
 	public Integer getId() {
 		return id;

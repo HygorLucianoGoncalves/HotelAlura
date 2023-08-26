@@ -54,7 +54,49 @@ public class ReservasDAO {
 		
 	}
 
+	public void atualizar(Reservas reservas) {
+		String sql = "UPDATE reservas SET dataEntrada = ?, dataSaida = ?, formaPagamento = ? WHERE id = ?";
+		
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		
+		try {
+			// CRIA CONEXÃO COM O BANCO
+			conn = ConnectionFactory.createConccectionToMySql();
+			
+			// CRIA A CLASSE PARA EXECUTAR A QUERY
+			pstm = (PreparedStatement) conn.prepareStatement(sql);
+			
+			//ADICIONAR OS VALORES PARA ATUALIZAR
+			//ADICIONAR OS VALORES QUE SÃO ESPERADOS PELA QUERY
+			pstm.setDate(1, new Date(reservas.getDataEntrada().getTime()));
+			pstm.setDate(2,new Date(reservas.getDataSaida().getTime()));
+			pstm.setString(3, reservas.getFormaPagamento());
+			
+			//QUAL O ID DO REGISTRO QUE DESEJA ATUALIZAR
+			pstm.setInt(4, reservas.getId());
+			
+			pstm.execute();
+			System.out.println("Atualizado com sucesso");
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			//fechar as conexões
+			try {
+				if (pstm!=null) {
+					pstm.close();
+				}
+				if (conn!=null) {
+					conn.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
 	public List<Reservas> getReservas() {
+
 		String sql = "SELECT * FROM reservas";
 		
 		List<Reservas> reservas = new ArrayList<Reservas>();
@@ -110,4 +152,5 @@ public class ReservasDAO {
 		return reservas;
 		
 	}
+
 }

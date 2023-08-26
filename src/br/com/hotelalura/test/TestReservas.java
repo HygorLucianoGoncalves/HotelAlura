@@ -1,5 +1,7 @@
 package br.com.hotelalura.test;
 
+
+
 import java.util.Date;
 
 import br.com.hotelalura.dao.ReservasDAO;
@@ -13,11 +15,17 @@ public class TestReservas {
 		r.setDataEntrada(new Date());
 		r.setDataSaida(new Date());
 		r.setValor(60);
-		r.setFormaPagamento("pix");
+		r.setFormaPagamento("poi");
 		
-		ReservasDAO.salvar(r);
+		//ReservasDAO.salvar(r);
+		Reservas c1 = new Reservas();
+		c1.setDataEntrada(new Date());
+		c1.setDataSaida(new Date());
+		c1.setFormaPagamento("TESTE");
+		c1.setId(1);// o id que esta no banco
 		
-		//VISUALIZÃO DOS DADOS
+	
+		reservaDAO.atualizar(c1);
 		
 		for (Reservas c : reservaDAO.getReservas()) {
 			System.out.println("id :"+c.getId());
