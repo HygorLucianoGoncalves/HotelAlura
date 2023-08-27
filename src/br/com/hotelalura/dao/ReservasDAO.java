@@ -95,6 +95,39 @@ public class ReservasDAO {
 		}
 	}
 	
+	public void deleteById(int id){
+		String sql = "DELETE FROM reservas WHERE id = ?";
+		
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		
+		try {
+			conn = ConnectionFactory.createConccectionToMySql();
+			
+			pstm = (PreparedStatement) conn.prepareStatement(sql);
+			
+			pstm.setInt(1, id);
+			
+			pstm.execute();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}finally {
+			//fechar as conexões
+			try {
+				if (pstm!=null) {
+					pstm.close();
+				}
+				if (conn!=null) {
+					conn.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
 	public List<Reservas> getReservas() {
 
 		String sql = "SELECT * FROM reservas";

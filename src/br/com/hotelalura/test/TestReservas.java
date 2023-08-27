@@ -18,6 +18,7 @@ public class TestReservas {
 		r.setFormaPagamento("poi");
 		
 		//ReservasDAO.salvar(r);
+		
 		Reservas c1 = new Reservas();
 		c1.setDataEntrada(new Date());
 		c1.setDataSaida(new Date());
@@ -25,7 +26,11 @@ public class TestReservas {
 		c1.setId(1);// o id que esta no banco
 		
 	
-		reservaDAO.atualizar(c1);
+		//reservaDAO.atualizar(c1);
+		
+		//Deleta o contato pelo seu numero de id 
+		
+		reservaDAO.deleteById(1);
 		
 		for (Reservas c : reservaDAO.getReservas()) {
 			System.out.println("id :"+c.getId());
