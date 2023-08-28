@@ -1,29 +1,35 @@
 package br.com.hotelalura.views;
 
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.SystemColor;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
 import java.awt.Color;
-import javax.swing.JTextField;
-import com.toedter.calendar.JDateChooser;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import java.text.Format;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.Toolkit;
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.sql.SQLException;
+import java.util.Calendar;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import com.toedter.calendar.JDateChooser;
+
+import br.com.hotelalura.dao.ReservasDAO;
+import br.com.hotelalura.model.Reservas;
 
 
 @SuppressWarnings("serial")
@@ -38,7 +44,6 @@ public class ReservasView extends JFrame {
 	private JLabel labelExit;
 	private JLabel lblValorSimbolo; 
 	private JLabel labelAtras;
-
 	/**
 	 * Launch the application.
 	 */
@@ -57,9 +62,13 @@ public class ReservasView extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	public ReservasView() {
+	public ReservasView() throws Exception {
 		super("Reserva");
+		//Connection conn = ConnectionFactory.createConccectionToMySql();
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ReservasView.class.getResource("/br/com/hotelalura/imagenes/aH-40px.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 910, 560);
@@ -142,6 +151,8 @@ public class ReservasView extends JFrame {
 		txtDataS.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				//Ativa o evento, após o usuário selecionar as datas, o valor da reserva deve ser calculado
+				calcularValor(txtDataE, txtDataS);
+				
 			}
 		});
 		txtDataS.setDateFormatString("yyyy-MM-dd");
@@ -295,9 +306,14 @@ public class ReservasView extends JFrame {
 		btnProximo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (ReservasView.txtDataE.getDate() != null && ReservasView.txtDataS.getDate() != null) {		
+				if (ReservasView.txtDataE.getDate() != null && ReservasView.txtDataS.getDate() != null) {	
+					salvaReserva();
+					//Reservas r = new Reservas();
+					//JOptionPane.showMessageDialog(contentPane, "Reserva salvo, seu id:  "+r.getId());
 					RegistroHospede registro = new RegistroHospede();
 					registro.setVisible(true);
+					
+					dispose();
 				} else {
 					JOptionPane.showMessageDialog(null, "Deve preencher todos os campos.");
 				}
@@ -315,6 +331,38 @@ public class ReservasView extends JFrame {
 		lblSeguinte.setFont(new Font("Roboto", Font.PLAIN, 18));
 		lblSeguinte.setBounds(0, 0, 122, 35);
 		btnProximo.add(lblSeguinte);
+	}
+	
+	
+	private void salvaReserva() {
+		String dataEntrada = ((JTextField) txtDataE.getDateEditor().getUiComponent()).getText();
+		String dataSaida = ((JTextField) txtDataS.getDateEditor().getUiComponent()).getText();
+		Reservas novaReserva = new Reservas(
+				java.sql.Date.valueOf(dataEntrada),
+				java.sql.Date.valueOf(dataSaida),txtValor.getText(), 
+				txtFormaPagamento.getSelectedItem().toString());
+		ReservasDAO d = new ReservasDAO();
+		d.salvar(novaReserva);
+		
+		JOptionPane.showMessageDialog(contentPane, "Reserva salvo, seu id: "+ novaReserva.getId());
+	}
+	
+	private void calcularValor(JDateChooser dataEntrada, JDateChooser dataSaida) {
+		if (dataEntrada.getDate() != null && dataSaida.getDate() != null) {
+			Calendar inicio = dataEntrada.getCalendar();
+			Calendar fim = dataSaida.getCalendar();
+			int diaria = 180;
+			int dias = -1;
+			int valor;
+			
+			while(inicio.before(fim)||inicio.equals(fim)) {
+				dias++;
+				inicio.add(Calendar.DATE,1);
+			}
+			
+			 valor = diaria * dias;
+			 txtValor.setText("" + valor);
+		}
 	}
 
 	//Código que permite movimentar a janela pela tela seguindo a posição de "x" e "y"	

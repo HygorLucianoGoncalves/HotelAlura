@@ -1,20 +1,22 @@
 package br.com.hotelalura.views;
 
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.Panel;
 import java.awt.Color;
-import java.awt.SystemColor;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
+import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Panel;
+import java.awt.SystemColor;
 import java.awt.Toolkit;
-import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class MenuPrincipal extends JFrame {
@@ -22,6 +24,7 @@ public class MenuPrincipal extends JFrame {
 	private JPanel contentPane;
 	private JLabel labelExit;
 	int xMouse, yMouse;
+
 
 	/**
 	 * Launch the application.
@@ -77,7 +80,7 @@ public class MenuPrincipal extends JFrame {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblCopyR = new JLabel("Desenvolvido por Fulanita de Tal © 2023");
+		JLabel lblCopyR = new JLabel("Desenvolvido por Hygor Luciano © 2023");
 		lblCopyR.setBounds(315, 11, 301, 19);
 		lblCopyR.setForeground(new Color(240, 248, 255));
 		lblCopyR.setFont(new Font("Roboto", Font.PLAIN, 16));
@@ -108,7 +111,10 @@ public class MenuPrincipal extends JFrame {
 		btnexit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.exit(0);
+				int sair = JOptionPane.showConfirmDialog(null, "Deseja mesmo sair?", "Selecione uma das opções",
+						JOptionPane.YES_NO_OPTION);
+				if (sair == 0)
+					System.exit(0);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -174,4 +180,5 @@ public class MenuPrincipal extends JFrame {
         int y = evt.getYOnScreen();
         this.setLocation(x - xMouse, y - yMouse);
 }
-}
+	}
+

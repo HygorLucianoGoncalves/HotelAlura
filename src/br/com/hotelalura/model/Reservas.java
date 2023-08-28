@@ -1,16 +1,37 @@
 package br.com.hotelalura.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Reservas {
 
 	private Integer id;
 	private Date dataEntrada;
 	private Date dataSaida;
-	private double valor;
+	private String valor;
 	private String formaPagamento;
 	
-	//GET ADN SET 
+	public Reservas() {
+		
+	}
+	
+	public Reservas(Integer id, Date dataEntrada, Date dataSaida, String valor, String formaPagamento) {
+		this.id = id;
+		this.dataEntrada = dataEntrada;
+		this.dataSaida = dataSaida;
+		this.valor = valor;
+		this.formaPagamento = formaPagamento;
+	}
+	
+	public Reservas(Date dataEntrada, Date dataSaida, String valor, String formaPagamento) {
+		super();
+		this.dataEntrada = dataEntrada;
+		this.dataSaida = dataSaida;
+		this.valor = valor;
+		this.formaPagamento = formaPagamento;
+	}
+	
+	
+	//GET AND SET 
 	public Integer getId() {
 		return id;
 	}
@@ -29,10 +50,10 @@ public class Reservas {
 	public void setDataSaida(Date dataSaida) {
 		this.dataSaida = dataSaida;
 	}
-	public double getValor() {
+	public String getValor() {
 		return valor;
 	}
-	public void setValor(double valor) {
+	public void setValor(String valor) {
 		this.valor = valor;
 	}
 	public String getFormaPagamento() {

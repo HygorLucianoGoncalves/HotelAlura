@@ -23,6 +23,8 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
 
+import br.com.hotelalura.model.Hospedes;
+
 @SuppressWarnings("serial")
 public class RegistroHospede extends JFrame {
 
@@ -125,7 +127,13 @@ public class RegistroHospede extends JFrame {
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ReservasView reservas = new ReservasView();
+				ReservasView reservas = null;
+				try {
+					reservas = new ReservasView();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				reservas.setVisible(true);
 				dispose();				
 			}
@@ -313,6 +321,11 @@ public class RegistroHospede extends JFrame {
 		logo.setIcon(new ImageIcon(RegistroHospede.class.getResource("/br/com/hotelalura/imagenes/Ha-100px.png")));
 	}
 	
+	public RegistroHospede(Integer id) {
+		Hospedes h = new Hospedes();
+		h.setId(id);
+	}
+
 	//Código que permite movimentar a janela pela tela seguindo a posição de "x" y "y"
 	 private void headerMousePressed(java.awt.event.MouseEvent evt) {
 	        xMouse = evt.getX();

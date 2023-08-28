@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import javax.sql.DataSource;
+
 public class ConnectionFactory {
+	
 	//NOME DO USUÁRIO DO MYSQL
 	private static final String USERNAME = "root";
 	
@@ -16,7 +19,7 @@ public class ConnectionFactory {
 	/*
 	 * CONEXÃO COM O BANCO DE DADOS
 	 */
-	public static Connection createConccectionToMySql() throws SQLException, ClassNotFoundException {
+	public static Connection createConccectionToMySql() throws Exception {
 		// CRIA A CONEXÃO COM COM O BANCO
 		Connection connection = DriverManager
 				.getConnection(
@@ -24,16 +27,5 @@ public class ConnectionFactory {
 						USERNAME,
 						PASSWORD);
 		return connection;					
-	}
-	public static void main(String[] args) throws Exception {
-		// RECUPERAR UMA CONEXÃO COM O BANCO DE DADOS 
-		Connection con = createConccectionToMySql();
-		
-		//TESTER SE A CONCEXÃO E NULA 
-		if (con!=null) {
-			System.out.println("Conexão obetida com sucesso!");
-			con.close();
-		}
-		
 	}
 }

@@ -13,9 +13,18 @@ import br.com.hotelalura.model.Reservas;
 
 public class ReservasDAO {
 	
-	public static void salvar(Reservas reservas) {
+	private Connection connection;
+	
+	public ReservasDAO() {
+	}
+
+	public ReservasDAO(Connection connection) { 
+		this.connection = connection;
+	}
+
+	public void salvar(Reservas reservas) {
 		
-		String sql = "INSERT INTO reservas(dataentrada, datasaida, valor, formapagamento ) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO reservas(dataEntrada, dataSaida, valor, formaagamento ) VALUES (?, ?, ?, ?)";
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -29,13 +38,14 @@ public class ReservasDAO {
 			//ADICIONAR OS VALORES QUE SÃO ESPERADOS PELA QUERY
 			pstm.setDate(1, new Date(reservas.getDataEntrada().getTime()));
 			pstm.setDate(2,new Date(reservas.getDataSaida().getTime()));
-			pstm.setDouble(3,reservas.getValor());
+			pstm.setString(3,reservas.getValor());
 			pstm.setString(4, reservas.getFormaPagamento());
 			
 			//EXECUTAR A QUERY
 			pstm.execute();
 			
 			System.out.println("Reserva salva com sucesso");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -158,7 +168,7 @@ public class ReservasDAO {
 				//RECUPERA A DATA DE SAIDA 
 				reservas2.setDataSaida(rset.getDate("dataSaida"));
 				//RECUPERA O VALOR DA RESERVA
-				reservas2.setValor(rset.getDouble("valor"));
+				reservas2.setValor(rset.getString("valor"));
 				
 				reservas.add(reservas2);
 				
