@@ -6,10 +6,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/leiag/Desktop/lib/jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/leiag/Desktop/lib/jgoodies-common-1.2.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/leiag/Desktop/lib/jgoodies-looks-2.4.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/leiag/Desktop/lib/junit-4.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/leiag/Desktop/mysql-connector-j-8.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/07923659176/Desktop/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/07923659176/Desktop/jgoodies-common-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/07923659176/Desktop/jgoodies-looks-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/07923659176/Desktop/junit-4.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
