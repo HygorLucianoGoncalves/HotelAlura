@@ -162,7 +162,7 @@ public class HospedesDAO {
 		}
 	}
 	
-	public List<Hospedes> getHospedes(String sobrenome) {
+	public List<Hospedes> buscarBySobrenome(String sobrenome) {
 
 		String sql =  "SELECT * FROM hospedes WHERE sobrenome = ?";
 		
@@ -225,4 +225,66 @@ public class HospedesDAO {
 		
 	}
 
+	public List<Hospedes> buscar() {
+
+		String sql =  "SELECT * FROM hospedes";
+		
+		List<Hospedes> hospedesList = new ArrayList<Hospedes>();
+		
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		
+		// CLASSE QUE VAI RECUERAR A DADOS DO BANCO DE DADOS 
+		ResultSet rset = null;
+		
+		try {
+			
+			conn = ConnectionFactory.createConccectionToMySql();
+			
+			pstm = (PreparedStatement) conn.prepareStatement(sql);
+			
+			rset = pstm.executeQuery();
+			
+			while (rset.next()) {
+				
+				Hospedes hospedes = new Hospedes(
+						rset.getInt("id"),
+						rset.getString("nome"),
+						rset.getString("sobrenome"),
+						rset.getDate("dataNascimento"),
+						rset.getString("nacionalidade"),
+						rset.getString("telefone"),
+						rset.getInt("idReservas")
+						);
+				
+				hospedesList.add(hospedes);
+				
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			try {
+				
+				if (rset != null) {
+					rset.close();
+				}
+				if (pstm!=null) {
+					pstm.close();
+				}
+				if (conn!=null) {
+					conn.close();
+				}
+			} catch (Exception e2) {
+				
+				e2.printStackTrace();
+				
+			}
+		}
+		return hospedesList;
+		
+	}
 }

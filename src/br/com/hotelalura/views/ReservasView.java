@@ -343,7 +343,6 @@ public class ReservasView extends JFrame {
 				txtFormaPagamento.getSelectedItem().toString());
 		ReservasDAO d = new ReservasDAO();
 		d.salvar(novaReserva);
-		
 		JOptionPane.showMessageDialog(contentPane, "Reserva salvo, seu id: "+ novaReserva.getId());
 	}
 	

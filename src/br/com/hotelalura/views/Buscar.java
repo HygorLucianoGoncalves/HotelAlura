@@ -6,6 +6,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import br.com.hotelalura.dao.HospedesDAO;
+import br.com.hotelalura.dao.ReservasDAO;
+import br.com.hotelalura.model.Hospedes;
+import br.com.hotelalura.model.Reservas;
+
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
@@ -20,6 +26,8 @@ import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.Iterator;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class Buscar extends JFrame {
@@ -208,7 +216,12 @@ public class Buscar extends JFrame {
 		btnbuscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
+				preencherTabelaReservas();
+				if (txtBuscar != null) {
+					System.out.println("entrou");
+					buscarReservasById();
+					System.out.println("OK");
+				}
 			}
 		});
 		btnbuscar.setLayout(null);
@@ -252,7 +265,147 @@ public class Buscar extends JFrame {
 		lblExcluir.setBounds(0, 0, 122, 35);
 		btnDeletar.add(lblExcluir);
 		setResizable(false);
+		
 	}
+	
+	
+	
+	
+	
+	
+	//BUSCA HOSPEDES
+	private HospedesDAO hospedesDAO;
+	
+	private List<Hospedes> buscarHospedes(){
+		return this.hospedesDAO.buscar();
+		
+	}
+	
+	private void preencherTabelaHospedes() {
+		
+		List<Hospedes> hospedesList = buscarHospedes();
+		
+		try {
+			for(Hospedes hospedes:hospedesList) {
+				modelo.addRow(new Object[] {
+						hospedes.getId(),
+						hospedes.getNome(),
+						hospedes.getSobrenome(),
+						hospedes.getDataNascimento(),
+						hospedes.getNacionalidade(),
+						hospedes.getTelefone(),
+						hospedes.getIdReserva()
+				});
+			}
+		}catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	private List<Hospedes> buscarHospedesBySobrenome() {
+		return this.hospedesDAO.buscarBySobrenome(txtBuscar.getName());
+	}
+	
+	private void preencherTabelaHospedesBySobrenome() {
+		
+			List<Hospedes> hospedesList = buscarHospedesBySobrenome();
+			
+			try {
+				for(Hospedes hospedes:hospedesList) {
+					modelo.addRow(new Object[] {
+							hospedes.getId(),
+							hospedes.getNome(),
+							hospedes.getSobrenome(),
+							hospedes.getDataNascimento(),
+							hospedes.getNacionalidade(),
+							hospedes.getTelefone(),
+							hospedes.getIdReserva()
+					});
+				}
+			}catch (Exception e) {
+				throw e;
+			}
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//BUSCA RESERVAS
+	private ReservasDAO reservasDAO;
+	
+	private Reservas buscarReservasById(){
+		return this.reservasDAO.buscaReservaById(Integer.parseInt(txtBuscar.getText()));
+	}
+	
+	private void preencherTabelaReservasByI() {
+		
+		List<Reservas> reservaLista = buscarReservas();
+		try {
+			for(Reservas reservas:reservaLista) {
+				modelo.addRow(new Object[] {
+						reservas.getId(),
+						reservas.getDataEntrada(),
+						reservas.getDataSaida(),
+						reservas.getValor(),
+						reservas.getFormaPagamento()
+				});
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	private List<Reservas> buscarReservas(){
+		return this.reservasDAO.buscaReservas();
+	}
+
+	private void preencherTabelaReservas() {
+		
+		List<Reservas> reservaLista = buscarReservas();
+		try {
+			for(Reservas reservas:reservaLista) {
+				modelo.addRow(new Object[] {
+						reservas.getId(),
+						reservas.getDataEntrada(),
+						reservas.getDataSaida(),
+						reservas.getValor(),
+						reservas.getFormaPagamento()
+				});
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//Código que permite movimentar a janela pela tela seguindo a posição de "x" e "y"	
 	 private void headerMousePressed(java.awt.event.MouseEvent evt) {
