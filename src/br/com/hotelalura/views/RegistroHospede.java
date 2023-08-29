@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -23,7 +24,10 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
 
+import br.com.hotelalura.dao.HospedesDAO;
+import br.com.hotelalura.dao.ReservasDAO;
 import br.com.hotelalura.model.Hospedes;
+import br.com.hotelalura.model.Reservas;
 
 @SuppressWarnings("serial")
 public class RegistroHospede extends JFrame {
@@ -290,6 +294,7 @@ public class RegistroHospede extends JFrame {
 		btnsalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				salvaHospedes();
 			}
 		});
 		btnsalvar.setLayout(null);
@@ -321,11 +326,34 @@ public class RegistroHospede extends JFrame {
 		logo.setIcon(new ImageIcon(RegistroHospede.class.getResource("/br/com/hotelalura/imagenes/Ha-100px.png")));
 	}
 	
-	public RegistroHospede(Integer id) {
-		Hospedes h = new Hospedes();
-		h.setId(id);
+	private void salvaHospedes() {
+		String dataNacimento = ((JTextField) txtDataN.getDateEditor().getUiComponent()).getText();
+		Hospedes novoHospedes = new Hospedes(
+				txtNome.getText(),
+				txtSobrenome.getText(),
+				java.sql.Date.valueOf(dataNacimento),
+				txtNacionalidade.getName(),
+				txtTelefone.getText(),
+				Integer.parseInt(txtNreserva.getText())
+				);
+				
+		HospedesDAO hospedesDAO = new HospedesDAO();
+		hospedesDAO.salvar(novoHospedes);
+		
+		Sucesso s = new Sucesso();
+		s.setVisible(true);
+		dispose();	
 	}
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//Código que permite movimentar a janela pela tela seguindo a posição de "x" y "y"
 	 private void headerMousePressed(java.awt.event.MouseEvent evt) {
 	        xMouse = evt.getX();
@@ -337,5 +365,7 @@ public class RegistroHospede extends JFrame {
 	        int y = evt.getYOnScreen();
 	        this.setLocation(x - xMouse, y - yMouse);
 }
+	    
+	  
 											
 }

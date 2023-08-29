@@ -16,6 +16,19 @@ public class Hospedes {
 	
 	
 	
+	public Hospedes(String nome, String sobrenome, Date dataNascimento, String nacionalidade, String telefone,
+			Integer idReserva) {
+		super();
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.dataNascimento = dataNascimento;
+		this.nacionalidade = nacionalidade;
+		this.telefone = telefone;
+		this.idReserva = idReserva;
+	}
+
+
+
 	public Hospedes(Integer id, String nome, String sobrenome, Date dataNascimento, String nacionalidade,
 			String telefone, Integer idReserva) {
 		this.id = id;

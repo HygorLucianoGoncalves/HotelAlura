@@ -162,9 +162,9 @@ public class HospedesDAO {
 		}
 	}
 	
-	public List<Hospedes> getHospedes() {
+	public List<Hospedes> getHospedes(String sobrenome) {
 
-		String sql = "SELECT * FROM hospedes";
+		String sql =  "SELECT * FROM hospedes WHERE sobrenome = ?";
 		
 		List<Hospedes> hospedesList = new ArrayList<Hospedes>();
 		
@@ -179,7 +179,7 @@ public class HospedesDAO {
 			conn = ConnectionFactory.createConccectionToMySql();
 			
 			pstm = (PreparedStatement) conn.prepareStatement(sql);
-			
+			pstm.setString(1, sobrenome); // Define o valor do parâmetro
 			rset = pstm.executeQuery();
 			
 			while (rset.next()) {
