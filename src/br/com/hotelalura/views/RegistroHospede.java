@@ -332,7 +332,7 @@ public class RegistroHospede extends JFrame {
 				txtNome.getText(),
 				txtSobrenome.getText(),
 				java.sql.Date.valueOf(dataNacimento),
-				txtNacionalidade.getName(),
+				txtNacionalidade.getSelectedItem().toString(),
 				txtTelefone.getText(),
 				Integer.parseInt(txtNreserva.getText())
 				);

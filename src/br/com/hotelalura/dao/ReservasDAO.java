@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+
+import javax.swing.JOptionPane;
 
 import br.com.hotelalura.factory.ConnectionFactory;
 import br.com.hotelalura.model.Reservas;
@@ -24,7 +26,7 @@ public class ReservasDAO {
 
 	public void salvar(Reservas reservas) {
 		
-		String sql = "INSERT INTO reservas(dataEntrada, dataSaida, valor, formaagamento ) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO reservas(dataEntrada, dataSaida, valor, formaPagamento ) VALUES (?, ?, ?, ?)";
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -43,8 +45,8 @@ public class ReservasDAO {
 			
 			//EXECUTAR A QUERY
 			pstm.execute();
-			
-			System.out.println("Reserva salva com sucesso");
+			// Obtendo o ID gerado pelo banco de dados
+	        
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -140,7 +142,7 @@ public class ReservasDAO {
 	
 	public List<Reservas> buscaReservas() {
 
-		String sql = "SELECT id,dataEntrada,dataSaida,valor,formaPagamento FROM reservas";
+		String sql = "SELECT * FROM reservas";
 		
 		List<Reservas> reservas = new ArrayList<Reservas>();
 		
@@ -200,7 +202,7 @@ public class ReservasDAO {
 	
 	public Reservas buscaReservaById(int id) {
 		
-	    String sql = "SELECT id, dataEntrada, dataSaida, valor, formaPagamento FROM reservas WHERE id = ?";
+	    String sql = "SELECT * FROM reservas WHERE id = ?";
 	    Reservas reserva = null;
 	    
 	    Connection conn = null;

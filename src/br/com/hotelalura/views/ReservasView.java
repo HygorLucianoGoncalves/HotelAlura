@@ -308,8 +308,7 @@ public class ReservasView extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if (ReservasView.txtDataE.getDate() != null && ReservasView.txtDataS.getDate() != null) {	
 					salvaReserva();
-					//Reservas r = new Reservas();
-					//JOptionPane.showMessageDialog(contentPane, "Reserva salvo, seu id:  "+r.getId());
+					
 					RegistroHospede registro = new RegistroHospede();
 					registro.setVisible(true);
 					
@@ -343,6 +342,7 @@ public class ReservasView extends JFrame {
 				txtFormaPagamento.getSelectedItem().toString());
 		ReservasDAO d = new ReservasDAO();
 		d.salvar(novaReserva);
+		
 		JOptionPane.showMessageDialog(contentPane, "Reserva salvo, seu id: "+ novaReserva.getId());
 	}
 	
